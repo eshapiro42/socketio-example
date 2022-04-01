@@ -2,6 +2,7 @@ from gevent import monkey
 monkey.patch_all()
 
 import flask_socketio
+import os
 from collections import defaultdict
 from flask import Flask, request, send_from_directory
 
@@ -83,4 +84,5 @@ def collect_colors(data):
     
 
 if __name__ == "__main__":
-    socketio.run(app, debug=True)
+    port = int(os.environ.get('PORT', 5000))
+    socketio.run(app, host="0.0.0.0", port=port, debug=True)
